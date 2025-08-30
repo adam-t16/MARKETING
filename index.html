@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>📊 Marketing Dashboard</h1>
+                </div>
+                <button id="exportBtn" class="export-btn">
+                    📄 Exporter PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Form Section -->
+            <section class="form-section">
+                <div class="form-card">
+                    <h2>Ajouter un Article</h2>
+                    <form id="articleForm" class="article-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="articleName">Nom de l'article</label>
+                                <input type="text" id="articleName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="articlePrice">Prix marketing (DH)</label>
+                                <input type="number" id="articlePrice" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="articleViews">Nombre de vues</label>
+                                <input type="number" id="articleViews" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="articleClicks">Nombre de clics</label>
+                                <input type="number" id="articleClicks" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="articleLikes">Nombre de likes</label>
+                                <input type="number" id="articleLikes" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="articleFollows">Nombre de follows</label>
+                                <input type="number" id="articleFollows" min="0" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            ➕ Ajouter l'article
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <h2>Statistiques Globales</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👁️</div>
+                        <div class="stat-content">
+                            <h3 id="totalViews">0</h3>
+                            <p>Total Vues</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🖱️</div>
+                        <div class="stat-content">
+                            <h3 id="totalClicks">0</h3>
+                            <p>Total Clics</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">❤️</div>
+                        <div class="stat-content">
+                            <h3 id="totalLikes">0</h3>
+                            <p>Total Likes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3 id="totalFollows">0</h3>
+                            <p>Total Follows</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Articles Section -->
+            <section class="articles-section">
+                <div class="section-header">
+                    <h2>Liste des Articles</h2>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="🔍 Rechercher un article...">
+                    </div>
+                </div>
+                <div id="articlesContainer" class="articles-container">
+                    <!-- Articles will be rendered here -->
+                </div>
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <h3>Aucun article trouvé</h3>
+                    <p>Ajoutez votre premier article pour commencer.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier l'article</h3>
+                <button id="closeModal" class="close-btn">&times;</button>
+            </div>
+            <form id="editForm" class="edit-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="editName">Nom de l'article</label>
+                        <input type="text" id="editName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPrice">Prix marketing (DH)</label>
+                        <input type="number" id="editPrice" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editViews">Nombre de vues</label>
+                        <input type="number" id="editViews" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editClicks">Nombre de clics</label>
+                        <input type="number" id="editClicks" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLikes">Nombre de likes</label>
+                        <input type="number" id="editLikes" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editFollows">Nombre de follows</label>
+                        <input type="number" id="editFollows" min="0" required>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancelEdit" class="cancel-btn">Annuler</button>
+                    <button type="submit" class="save-btn">💾 Sauvegarder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
